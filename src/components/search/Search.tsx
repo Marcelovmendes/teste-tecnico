@@ -1,8 +1,8 @@
-import SearchForm from './SearchStyled';
+import SearchForm from './SearchForm';
 import { useState } from 'react';
 function Search() {
-  const [city, setCity] = useState({ city: '' });
-
+  const [city, setCity] = useState({ name: '' });
+  console.log(city, 'city');
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCity({ ...city, [e.target.name]: e.target.value });
   };
