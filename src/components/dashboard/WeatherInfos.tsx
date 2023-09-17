@@ -1,18 +1,24 @@
 import { styled } from 'styled-components';
+import useWeather from '../../context/WeatherContext';
 
 const WeatherInfos = () => {
+  const { weatherData } = useWeather();
+  const convertTemp = (temp: number) => {
+    const tempCelsius = temp - 273.15;
+    return tempCelsius.toFixed(1);
+  };
   return (
     <StyledInfos>
       <ContainerCity>
         <CityNow>
-          <h2>Agora: London</h2>
+          <h2>Agora: {weatherData?.city}</h2>
         </CityNow>
-        <h3>Minima: 14</h3>
-        <h3>Maxima: 25</h3>
+        <h3>Minima: {weatherData?.minTemp}</h3>
+        <h3>Maxima: {weatherData?.maxTemp}</h3>
       </ContainerCity>
       <ContainerWeather>
-        <h3>Nublado</h3>
-        <h1>18 C</h1>
+        <h3>{weatherData?.description}</h3>
+        <h1>{convertTemp(weatherData?.temp ?? 18)}°C</h1>
       </ContainerWeather>
     </StyledInfos>
   );
