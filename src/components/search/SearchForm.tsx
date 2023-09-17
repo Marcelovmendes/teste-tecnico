@@ -3,9 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { SearchFormProps } from '../../interfaces/SearchForm';
 
-const SearchForm: React.FC<SearchFormProps> = (props) => {
-  const { city, onSubmit, onInputChange } = props;
-
+const SearchForm: React.FC<SearchFormProps> = ({ city, onSubmit, onInputChange }) => {
   return (
     <FormWrapper>
       <form onSubmit={onSubmit}>
