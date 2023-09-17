@@ -1,21 +1,14 @@
 import SearchForm from './SearchForm';
-import { useState } from 'react';
-import axios from 'axios'; // Importe o Axios
+import axios from 'axios';
+import useForm from '../../hooks/useForm';
 
 const apiKey = '36df708715231e0ab6c8216661f2991b';
 
 const Search = () => {
-  const [city, setCity] = useState({ name: '' });
-  console.log(city, 'city');
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCity({ ...city, [e.target.name]: e.target.value });
-  };
-
+  const { city, handleInputChange, resetForm } = useForm({ name: '' });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    const { name } = city;
     e.preventDefault();
-
+    const { name } = city;
     try {
       const weatherResponse = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${apiKey}`,
@@ -37,9 +30,10 @@ const Search = () => {
 
       console.log('Weather Data:', weatherResponse.data);
       console.log('Forecast Data:', forecastResponse.data);
+      resetForm();
     } catch (err) {
       if (err instanceof Error) {
-        console.log(err.message);
+        console.log(err);
       } else {
         console.log('Unexpected error', err);
       }
