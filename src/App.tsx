@@ -1,5 +1,7 @@
 import { styled } from 'styled-components';
 import Search from './components/search/Search';
+import WeatherInfos from './components/dashboard/WheaterInfos';
+import WeatherGraphic from './components/graphic/WeatherGraphic';
 
 function App() {
   // const data = [];
@@ -9,6 +11,8 @@ function App() {
         <h1>Levo um casaquinho?</h1>
         <Search />
       </NavBar>
+      <WeatherInfos />
+      <WeatherGraphic />
     </Container>
   );
 }
@@ -23,6 +27,7 @@ const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Sarala', sans-serif;
 `;
 
 const NavBar = styled.div`
@@ -32,7 +37,6 @@ const NavBar = styled.div`
   h1 {
     color: #3848a6;
     font-size: 20px;
-    font-family: 'Sarala', sans-serif;
     font-weight: 700;
   }
 `;

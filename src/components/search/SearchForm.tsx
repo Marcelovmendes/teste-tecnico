@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SearchFormProps } from '../../interfaces/SearchForm';
+import { SearchFormProps } from '../../interfaces/SearchProps';
 
 const SearchForm: React.FC<SearchFormProps> = ({ city, onSubmit, onInputChange }) => {
   return (
@@ -20,13 +20,13 @@ const SearchForm: React.FC<SearchFormProps> = ({ city, onSubmit, onInputChange }
 };
 
 export default SearchForm;
+
 const FormWrapper = styled.section`
   form {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 12px;
-    font-family: 'Sarala', sans-serif;
+    margin-top: 11px;
     input {
       border: 1px solid #a7a7a7;
       font-size: 10px;
