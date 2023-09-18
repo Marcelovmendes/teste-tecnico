@@ -2,12 +2,14 @@ import SearchForm from './SearchForm';
 import axios from 'axios';
 import useForm from '../../hooks/useForm';
 import useWeather from '../../context/WeatherContext';
+import useForecast from '../../context/ForecastContext';
 
 const apiKey = '36df708715231e0ab6c8216661f2991b';
 
 const Search = () => {
   const { city, handleInputChange, resetForm } = useForm({ name: '' });
   const { setWeatherData } = useWeather();
+  const { setForecastData } = useForecast();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { name } = city;
@@ -36,8 +38,17 @@ const Search = () => {
         maxTemp: weatherResponse.data.main.temp_max,
         description: weatherResponse.data.weather[0].description,
       });
-      console.log(weatherResponse.data);
-      console.log(forecastResponse.data);
+      const forecastDataList = forecastResponse.data.list.map(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (item: any) => ({
+          temp: item.main.temp,
+          minTemp: item.main.temp_min,
+          maxTemp: item.main.temp_max,
+          dt: item.dt_txt,
+        }),
+      );
+      console.log(forecastDataList);
+      setForecastData(forecastDataList);
       resetForm();
     } catch (err: ErrorConstructor | unknown) {
       console.log(err);

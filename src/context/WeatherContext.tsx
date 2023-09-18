@@ -1,10 +1,6 @@
 import { createContext, useContext, ReactNode, useState } from 'react';
-import { WeatherData } from '../interfaces/ClimateData';
+import { WeatherContextType, WeatherData } from '../interfaces/ClimateData';
 
-interface WeatherContextType {
-  weatherData: WeatherData | null;
-  setWeatherData: (data: WeatherData | null) => void;
-}
 
 const WeatherContext = createContext<WeatherContextType | undefined>(undefined);
 

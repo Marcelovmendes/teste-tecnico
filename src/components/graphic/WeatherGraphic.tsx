@@ -1,19 +1,23 @@
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import useForecast from '../../context/ForecastContext';
+import { format } from 'date-fns';
+import { pt } from 'date-fns/locale';
 
-const data = [{ name: 'Page', uv: 400, pv: 2400, amt: 2400 }];
 const WeatherGraphic = () => {
+  const { forecastData } = useForecast();
+  console.log(forecastData);
   return (
-    <LineChart
-      width={400}
-      height={160}
-      data={data}
-      margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-    >
-      <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-      <XAxis dataKey="name" />
+    <LineChart width={540} height={240} data={forecastData}>
+      <XAxis
+        dataKey="dt"
+        interval={Math.ceil(forecastData.length / 7)}
+        tickFormatter={(value) => format(new Date(value), 'dd/MM(eee)', { locale: pt })}
+      />
       <YAxis />
+      <CartesianGrid stroke="#ccc" />
       <Tooltip />
+      <Legend />
+      <Line type="monotone" dataKey="" stroke="red" />
     </LineChart>
   );
 };

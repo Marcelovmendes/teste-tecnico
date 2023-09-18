@@ -4,19 +4,22 @@ import Search from './components/search/Search';
 import WeatherGraphic from './components/graphic/WeatherGraphic';
 import { WeatherProvider } from './context/WeatherContext';
 import WeatherInfos from './components/dashboard/WeatherInfos';
+import { ForecastProvider } from './context/ForecastContext';
 
 function App() {
   return (
-    <WeatherProvider>
-      <Container>
-        <NavBar>
-          <h1>Levo um casaquinho?</h1>
-          <Search />
-        </NavBar>
-        <WeatherInfos />
-        <WeatherGraphic />
-      </Container>
-    </WeatherProvider>
+    <ForecastProvider>
+      <WeatherProvider>
+        <Container>
+          <NavBar>
+            <h1>Levo um casaquinho?</h1>
+            <Search />
+          </NavBar>
+          <WeatherInfos />
+          <WeatherGraphic />
+        </Container>
+      </WeatherProvider>
+    </ForecastProvider>
   );
 }
 
