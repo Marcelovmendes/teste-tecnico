@@ -50,12 +50,12 @@ const LoadWeather = styled.div`
 `;
 const StyledInfos = styled.div`
   width: 45vw;
-  height: 84px;
+  height: 88px;
   border-radius: 16px;
   color: white;
   display: flex;
   padding: 14px;
-  margin-top: 44px;
+  margin-top: 48px;
   h1 {
     font-size: 36px;
   }

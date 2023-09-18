@@ -1,28 +1,89 @@
-# React + TypeScript + Vite
+# Weather Forecast Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple application to fetch weather information for cities.
 
-Currently, two official plugins are available:
+![](public/img.jpeg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
 
-## Expanding the ESLint configuration
+One of the main concerns for those planning a trip is knowing what type of clothing to bring, depending on the weather conditions at the destination. The Weather Forecast Web is a practical solution that allows users to quickly check the weather information for a city, including the current temperature, maximum and minimum temperatures, and the forecast for the upcoming days.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
+- React
+- TypeScript
+- Vite
+- Recharts (for chart visualization)
+- Styled Components (for styling)
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+## Features
+
+- Search for weather information by city name.
+- Display current temperature, maximum, and minimum temperatures.
+- Visualize weather forecasts for the upcoming days in a chart format.
+
+## Deploy Vercel
+
+1. Access on
+
+   https://teste-tecnico-omega.vercel.app/
+
+## How to use on your machine
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/Marcelovmendes/teste-tecnico
+
+   ```
+
+2. Install Dependencies:
+
+```bash
+ npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# teste-tecnico
+3. Start the Development Server
+
+```bash
+npm run dev
+```
+
+## What to do when add new ENV VARIABLES
+
+1. Add them to your local `.env`
+2. Follow guide `.env.example`
+
+## Prettier format setup
+
+1. Add new file to root directory `.vscode/settings.json`
+
+```bash
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "files.eol": "\n",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+```
+
+2. Add new file to root directory `.prettierrc.json`
+
+```bash
+ {
+  "semi": true,
+  "trailingComma": "all",
+  "singleQuote": true,
+  "printWidth": 90
+}
+```
+
+# Author
+
+Marcelo Vitor Mendes
+
+marcelo.vitor@engenharia.ufjf.br

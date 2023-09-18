@@ -8,7 +8,7 @@ const WeatherGraphic = () => {
   return forecastData && forecastData.length > 0 ? (
     <LineChart
       width={550}
-      height={300}
+      height={324}
       data={forecastData}
       margin={{ top: 40, right: 20 }}
     >
@@ -16,10 +16,10 @@ const WeatherGraphic = () => {
         dataKey="dt"
         interval={Math.ceil(forecastData.length / 8)}
         tickFormatter={(value) => format(new Date(value), 'dd/MM(eee)', { locale: pt })}
-        fontSize={12}
+        fontSize={14}
         textAnchor="start"
       />
-      <YAxis />
+      <YAxis fontSize={14} tickCount={4} />
       <CartesianGrid stroke="#ccc" opacity={0.4} />
       <Tooltip />
       <Legend />

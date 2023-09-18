@@ -26,10 +26,10 @@ const FormWrapper = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 19px;
     input {
       border: 1px solid #a7a7a7;
-      font-size: 16.35px;
+      font-size: 19px;
       border-radius: 1px;
       outline: none;
       &:active {
@@ -44,7 +44,7 @@ const FormWrapper = styled.section`
       &:active {
         box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
       }
-      font-size: 16.35px;
+      font-size: 20px;
       line-height: normal;
       padding: 1px 2px;
       border: 1px solid #a7a7a7;
