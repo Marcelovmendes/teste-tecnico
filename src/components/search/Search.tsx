@@ -4,7 +4,9 @@ import useForm from '../../hooks/useForm';
 import useWeather from '../../context/WeatherContext';
 import useForecast from '../../context/ForecastContext';
 
-const apiKey = '36df708715231e0ab6c8216661f2991b';
+const apiKey = import.meta.env.VITE_REACT_API_KEY;
+const weatherUrl = import.meta.env.VITE_REACT_WEATHER_URL;
+const forecastUrl = import.meta.env.VITE_REACT_FORECAST_URL;
 
 const Search = () => {
   const { city, handleInputChange, resetForm } = useForm({ name: '' });
@@ -14,17 +16,14 @@ const Search = () => {
     e.preventDefault();
     const { name } = city;
     try {
-      const weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${apiKey}&lang=pt_br`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      const weatherResponse = await axios.get(`${weatherUrl}q=${name}&appid=${apiKey}`, {
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+      });
 
       const forecastResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${name}&appid=${apiKey}`,
+        `${forecastUrl}q=${name}&appid=${apiKey}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -36,18 +35,17 @@ const Search = () => {
         temp: weatherResponse.data.main.temp,
         minTemp: weatherResponse.data.main.temp_min,
         maxTemp: weatherResponse.data.main.temp_max,
-        description: weatherResponse.data.weather[0].description,
+        description: weatherResponse.data.weather[0].main,
       });
       const forecastDataList = forecastResponse.data.list.map(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (item: any) => ({
-          temp: item.main.temp,
-          minTemp: item.main.temp_min,
-          maxTemp: item.main.temp_max,
+          temp: (item.main.temp - 273.15).toFixed(2),
+          minTemp: (item.main.temp_min - 273.15).toFixed(2),
+          maxTemp: (item.main.temp_max - 273.15).toFixed(2),
           dt: item.dt_txt,
         }),
       );
-      console.log(forecastDataList);
       setForecastData(forecastDataList);
       resetForm();
     } catch (err: ErrorConstructor | unknown) {
