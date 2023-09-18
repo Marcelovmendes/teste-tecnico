@@ -13,7 +13,7 @@ export const weatherConditionStyles: Record<
     color: 'white',
   },
   Rain: {
-    background: 'blue',
+    background: '#3970FE',
     legend: 'Chovendo',
     color: 'white',
   },

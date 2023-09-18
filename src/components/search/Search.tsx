@@ -17,8 +17,6 @@ const Search = () => {
       const weatherResponse = await getWeather(name);
       const forecastResponse = await getForecast(name);
 
-      console.log(weatherResponse);
-
       setWeatherData({
         city: weatherResponse.name,
         temp: weatherResponse.main.temp,
