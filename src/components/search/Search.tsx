@@ -1,12 +1,10 @@
 import SearchForm from './SearchForm';
-import axios from 'axios';
+
 import useForm from '../../hooks/useForm';
 import useWeather from '../../context/WeatherContext';
 import useForecast from '../../context/ForecastContext';
-
-const apiKey = import.meta.env.VITE_REACT_API_KEY;
-const weatherUrl = import.meta.env.VITE_REACT_WEATHER_URL;
-const forecastUrl = import.meta.env.VITE_REACT_FORECAST_URL;
+import getForecast from '../../service/forecastApi';
+import getWeather from '../../service/weatherApi';
 
 const Search = () => {
   const { city, handleInputChange, resetForm } = useForm({ name: '' });
@@ -16,28 +14,19 @@ const Search = () => {
     e.preventDefault();
     const { name } = city;
     try {
-      const weatherResponse = await axios.get(`${weatherUrl}q=${name}&appid=${apiKey}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const weatherResponse = await getWeather(name);
+      const forecastResponse = await getForecast(name);
 
-      const forecastResponse = await axios.get(
-        `${forecastUrl}q=${name}&appid=${apiKey}`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      );
+      console.log(weatherResponse);
+
       setWeatherData({
-        city: weatherResponse.data.name,
-        temp: weatherResponse.data.main.temp,
-        minTemp: weatherResponse.data.main.temp_min,
-        maxTemp: weatherResponse.data.main.temp_max,
-        description: weatherResponse.data.weather[0].main,
+        city: weatherResponse.name,
+        temp: weatherResponse.main.temp,
+        minTemp: weatherResponse.main.temp_min,
+        maxTemp: weatherResponse.main.temp_max,
+        description: weatherResponse.weather[0].main,
       });
-      const forecastDataList = forecastResponse.data.list.map(
+      const forecastDataList = forecastResponse.list.map(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (item: any) => ({
           temp: (item.main.temp - 273.15).toFixed(2),

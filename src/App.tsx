@@ -41,7 +41,7 @@ const NavBar = styled.div`
   margin-top: 0;
   h1 {
     color: #3848a6;
-    font-size: 20px;
+    font-size: 32px;
     font-weight: 700;
   }
 `;

@@ -8,24 +8,31 @@ const WeatherInfos = () => {
     return tempCelsius.toFixed(1);
   };
   const weatherStyle = weatherConditionStyles[weatherData?.description || ''];
-  console.log(weatherStyle, 'color');
-  console.log(weatherData?.description, 'description');
+  if (!weatherData) {
+    return (
+      <LoadWeather>
+        <div>Insira uma cidade para ver o clima atual da localidade!</div>
+      </LoadWeather>
+    );
+  }
+
   return (
     <StyledInfos
       style={{
         backgroundColor: weatherStyle?.background ? weatherStyle?.background : '#808080',
+        color: weatherStyle?.color ? weatherStyle?.color : 'white',
       }}
     >
       <ContainerCity>
         <CityNow>
-          <h2>Agora:{weatherData?.city}</h2>
+          <h2>Agora: {weatherData.city}</h2>
         </CityNow>
-        <h3>Minima:{weatherData?.minTemp}</h3>
-        <h3>Maxima:{weatherData?.maxTemp}</h3>
+        <h3>Minima:{convertTemp(weatherData.minTemp)}°C</h3>
+        <h3>Maxima:{convertTemp(weatherData.maxTemp)}°C</h3>
       </ContainerCity>
       <ContainerWeather>
         <h3>{weatherStyle?.legend}</h3>
-        <h1>{convertTemp(weatherData?.temp ?? 0)}°C</h1>
+        <h1>{convertTemp(weatherData.temp)}°C</h1>
       </ContainerWeather>
     </StyledInfos>
   );
@@ -33,22 +40,34 @@ const WeatherInfos = () => {
 
 export default WeatherInfos;
 
+const LoadWeather = styled.div`
+  width: 40vw;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+`;
 const StyledInfos = styled.div`
   width: 45vw;
-  height: 48px;
-  border-radius: 10px;
+  height: 84px;
+  border-radius: 16px;
   color: white;
   display: flex;
-  padding: 12px;
-  margin: 30px;
+  padding: 14px;
+  margin-top: 44px;
   h1 {
-    font-size: 24px;
+    font-size: 36px;
   }
   h2 {
-    font-size: 12px;
+    margin-top: 6px;
+    margin-left: 5px;
+    font-size: 18px;
   }
   h3 {
-    font-size: 10px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-bottom: 2px;
   }
 `;
 
@@ -58,6 +77,10 @@ const ContainerCity = styled.div`
 `;
 const CityNow = styled.div`
   height: 50%;
+  display: flex;
+  margin-top: 8px;
+  flex-direction: column;
+  justify-content: start;
 `;
 const ContainerWeather = styled.div`
   width: 50%;

@@ -4,7 +4,11 @@ const weatherUrl = import.meta.env.VITE_REACT_WEATHER_URL;
 
 const getWeather = async (name: string) => {
   try {
-    const { data } = await axios.get(`${weatherUrl}q=${name}&appid=${apiKey}`);
+    const { data } = await axios.get(`${weatherUrl}q=${name}&appid=${apiKey}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     return data;
   } catch (error) {
     console.log(error);
