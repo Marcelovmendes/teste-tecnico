@@ -14,7 +14,7 @@ const WeatherGraphic = () => {
     >
       <XAxis
         dataKey="dt"
-        interval={Math.ceil(forecastData.length / 7)}
+        interval={Math.ceil(forecastData.length / 8)}
         tickFormatter={(value) => format(new Date(value), 'dd/MM(eee)', { locale: pt })}
         fontSize={12}
         textAnchor="start"
