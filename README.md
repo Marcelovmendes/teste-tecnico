@@ -49,6 +49,44 @@ One of the main concerns for those planning a trip is knowing what type of cloth
 npm run dev
 ```
 
+## Dockerfile for Building and Running the Application
+
+This Dockerfile is used to build and run the application using Docker containers. It is designed to work with Node.js and Nginx to create a production-ready environment.
+
+### Link dockerHub repository
+
+1. Access on
+
+   https://hub.docker.com/r/marcelocortess/desafio-tecnico/tags
+
+### Building the Image
+
+To build the Docker image, use the following command:
+
+```bash
+docker build -t marcelocortess/desafio-tecnico:latest .
+```
+
+This command will build an image based on Node.js Alpine and copy the application code to the image, install dependencies, and build the application using `npm run build`.
+
+### Running the Container
+
+Once the image is built, you can run the Docker container using the following command:
+
+```bash
+docker run -p 80:80 marcelocortess/desafio-tecnico:latest
+```
+
+This command will start an Nginx server inside the container, serving the built application on port 80.
+
+### Accessing the Application
+
+You can access the application by opening a web browser and navigating to `http://localhost` if you are running Docker locally. If you are running it on a remote server or in a different environment, replace localhost with the appropriate hostname or IP address.
+
+### Exposed Ports
+
+Port 80: The Nginx server is configured to listen on port 80.
+
 ## What to do when add new ENV VARIABLES
 
 1. Add them to your local `.env`
