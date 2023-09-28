@@ -9,7 +9,8 @@ const getWeather = async (name: string) => {
         'Content-Type': 'application/json',
       },
     });
-    return data;
+    const weatherResponse = data;
+    return weatherResponse;
   } catch (error) {
     console.log(error);
   }
