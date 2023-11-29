@@ -9,8 +9,7 @@ const getForecast = async (name: string) => {
         'Content-Type': 'application/json',
       },
     });
-    const forecastResponse = data;
-    return forecastResponse;
+   return data;
   } catch (error) {
     console.log(error);
   }
