@@ -12,6 +12,7 @@ function App() {
       <WeatherProvider>
         <Container>
           <NavBar>
+            <h1>Levo um casaquinho?</h1>
             <Search />
           </NavBar>
           <WeatherInfos />
