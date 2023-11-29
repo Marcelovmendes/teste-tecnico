@@ -11,12 +11,10 @@ const Search = () => {
   const { setForecastData } = useForecast();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { name } = city;
+    const name = city.name;
     try {
-      const [weatherResponse, forecastResponse] = await Promise.all([
-        getWeather(name),
-        getForecast(name),
-      ]);
+      const weatherResponse = await getWeather(name);
+      const forecastResponse = await getForecast(name);
 
       setWeatherData({
         city: weatherResponse.name,
@@ -25,32 +23,19 @@ const Search = () => {
         maxTemp: weatherResponse.main.temp_max,
         description: weatherResponse.weather[0].main,
       });
-
-      const convertTemp = (temp: number) => {
-        const tempCelsius = temp - 273.15;
-        return tempCelsius.toFixed(2);
-      };
       const forecastDataList = forecastResponse.list.map(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (item: any) => ({
-          temp: convertTemp(item.main.temp),
-          minTemp: convertTemp(item.main.temp_min),
-          maxTemp: convertTemp(item.main.temp_max),
+          temp: (item.main.temp - 273.15).toFixed(2),
+          minTemp: (item.main.temp_min - 273.15).toFixed(2),
+          maxTemp: (item.main.temp_max - 273.15).toFixed(2),
           dt: item.dt_txt,
         }),
       );
-
       setForecastData(forecastDataList);
       resetForm();
-    } catch (err) {
-      if (
-        err instanceof Error &&
-        err.message.includes("Cannot read properties of undefined (reading 'name')")
-      ) {
-        alert('Cidade não encontrada ou não é valida');
-      } else {
-        alert('Erro ao buscar cidade');
-      }
+    } catch (err: ErrorConstructor | unknown) {
+      console.log(err);
     }
   };
 
