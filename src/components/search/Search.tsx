@@ -13,8 +13,10 @@ const Search = () => {
     e.preventDefault();
     const { name } = city;
     try {
-      const weatherResponse = await getWeather(name);
-      const forecastResponse = await getForecast(name);
+      const [weatherResponse, forecastResponse] = await Promise.all([
+        getWeather(name),
+        getForecast(name),
+      ]);
 
       setWeatherData({
         city: weatherResponse.name,
