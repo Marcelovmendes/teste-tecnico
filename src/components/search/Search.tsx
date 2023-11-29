@@ -11,7 +11,7 @@ const Search = () => {
   const { setForecastData } = useForecast();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const name = city.name;
+    const { name } = city;
     try {
       const weatherResponse = await getWeather(name);
       const forecastResponse = await getForecast(name);
